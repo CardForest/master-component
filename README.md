@@ -29,7 +29,7 @@ BSD. Copyright © 2015 [Amit Portnoy](https://github.com/amitport).
 
 [npm-image]: https://img.shields.io/npm/v/master-component.svg?style=flat
 [npm-url]: https://npmjs.org/package/master-component
-[travis-image]: https://travis-ci.org/amitport/master-component.svg?branch=master
-[travis-url]: https://travis-ci.org/amitport/master-component
-[daviddm-image]: https://david-dm.org/amitport/master-component.svg?theme=shields.io
-[daviddm-url]: https://david-dm.org/amitport/master-component
+[travis-image]: https://travis-ci.org/CardForest/master-component.svg?branch=master
+[travis-url]: https://travis-ci.org/CardForest/master-component
+[daviddm-image]: https://david-dm.org/CardForest/master-component.svg?theme=shields.io
+[daviddm-url]: https://david-dm.org/CardForest/master-component
