@@ -2,6 +2,10 @@
 
 > JavaScript Objects with strict structure, typing, access control, and change control.
 
+** this is a work in progress **
+
+For now the [tests](https://github.com/CardForest/master-component/blob/master/test/test.js) are the only documentation.
+
 
 ## Install
 
@@ -9,11 +13,10 @@
 $ npm install --save master-component
 ```
 
-
 ## Usage
 
 ```js
-var masterComponent = require('master-component');
+var MasterComponent = require('master-component');
 
 ```
 
