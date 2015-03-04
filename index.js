@@ -19,13 +19,13 @@ function _Array(type) {
   return res;
 }
 
-function _Type(type) {
+function _Type(type) { // jshint ignore:line
   if (type == null) {
     throw Error('type must not be null');
   }
   if (type.constructor === Function) {
     // factory functions
-    return type()
+    return type();
   }
   if (type.constructor === Object) {
     // sub-objects
@@ -45,4 +45,4 @@ function _Type(type) {
 module.exports = {
   Object: _Object,
   Array: _Array
-}
+};
