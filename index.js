@@ -32,7 +32,7 @@ function _Object(schema) {
   return res;
 }
 
-function _MasterConponent() {
+function _MasterComponent() {
 
 }
 function _FixedSizeArray(config) {
@@ -45,7 +45,7 @@ function _FixedSizeArray(config) {
   }
   return res;
 }
-_FixedSizeArray.prototype = Object.create(_MasterConponent.prototype);
+_FixedSizeArray.prototype = Object.create(_MasterComponent.prototype);
 
 //function _Array(type) {
 //  var res = [];
@@ -68,7 +68,7 @@ function _Type(type) { // jshint ignore:line
     throw Error('type must be defined');
   }
 
-  if (type.prototype instanceof _MasterConponent) {
+  if (type.prototype instanceof _MasterComponent) {
     return type(typeConfig);
   }
 

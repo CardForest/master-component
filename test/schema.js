@@ -1,12 +1,22 @@
 'use strict';
 
 var assert = require('chai').assert;
-var MasterComponent = require('../');
+var MasterComponent = require('../index2');
 
-describe('master-component object schema', function () {
+describe('master-component schema', function () {
 
-  it('allow props from factory functions', function () {
-    var o = MasterComponent.Object({
+  it('allows simple factory functions', function () {
+    var n = MasterComponent(Number);
+    assert.strictEqual(n, 0);
+    var s = MasterComponent(String);
+    assert.strictEqual(s, '');
+    var b = MasterComponent(Boolean);
+    assert.strictEqual(b, false);
+  });
+
+
+  it('allows props from factory functions', function () {
+    var o = MasterComponent({
       n: Number,
       s: String,
       b: Boolean
@@ -17,8 +27,8 @@ describe('master-component object schema', function () {
     assert.strictEqual(o.b, false);
   });
 
-  it('allow props from sub-objects', function () {
-    var o = MasterComponent.Object({
+  it('allows props from sub-objects', function () {
+    var o = MasterComponent({
       inner: {
         n: Number,
         s: String,
@@ -31,9 +41,8 @@ describe('master-component object schema', function () {
     assert.strictEqual(o.inner.b, false);
   });
 
-
-  it('allow props from $type config objects', function () {
-    var o = MasterComponent.Object({
+  it('allows props from $type config objects', function () {
+    var o = MasterComponent({
       n: {$type: Number},
       s: {$type: String},
       b: {$type: Boolean},
@@ -55,8 +64,9 @@ describe('master-component object schema', function () {
     assert.strictEqual(o.inner.b, false);
   });
 
-  it('allow MasterComponent.FixedSizeArray as $type with factory function elemType', function () {
-    var o = MasterComponent.Object({
+
+  it('allows MasterComponent.FixedSizeArray as $type with factory function elemType', function () {
+    var o = MasterComponent({
       arr: {
         size: 4,
         $type: MasterComponent.FixedSizeArray,
@@ -69,8 +79,8 @@ describe('master-component object schema', function () {
     assert.strictEqual(o.arr[3], 0);
   });
 
-  it('allow MasterComponent.FixedSizeArray as $type with sub-objects elemType', function () {
-    var o = MasterComponent.Object({
+  it('allows MasterComponent.FixedSizeArray as $type with sub-objects elemType', function () {
+    var o = MasterComponent({
       arr: {
         $type: MasterComponent.FixedSizeArray,
         size: 4,
@@ -87,8 +97,8 @@ describe('master-component object schema', function () {
     assert.strictEqual(o.arr[3].b, false);
   });
 
-  it('allow nested MasterComponent.FixedSizeArray', function () {
-    var o = MasterComponent.Object({
+  it('allows nested MasterComponent.FixedSizeArray', function () {
+    var o = MasterComponent({
       s: String,
       inner: {
         s: String,
