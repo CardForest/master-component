@@ -25,6 +25,35 @@ var MasterComponent = require('master-component');
 $ npm run browser
 ```
 
+## Roadmap
+
+### v0.1.0
+
+##### Structure 
+- [x] primitive values
+- [x] nested js object
+- [x] fixed array type
+- [ ] prevent setting of non primitive values
+
+##### Typing
+- [ ] guard types of primitive values
+
+##### Access 
+- [x] readAccess modifiers in primitive values
+- [x] readAccess modifiers in objects
+- [ ] readAccess modifiers in fixed arrays
+
+##### Change
+- [ ] record primitive value set in changeset
+
+### v0.2.0
+
+##### Custom Components
+- [ ] structure
+- [ ] access
+- [ ] change
+
+
 
 ## License
 
