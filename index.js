@@ -13,8 +13,8 @@ function _$protect(schema, master) {
         if (readAccess) {
           var propertyVal = master[propertyName];
           res[propertyName] = (propertyVal.$protect && propertyVal.$protect.constructor === Function) ?
-            propertyVal.$protect() :
-            res[propertyName] = master[propertyName];
+                                propertyVal.$protect() :
+                                res[propertyName] = master[propertyName];
         }
       }
     }
