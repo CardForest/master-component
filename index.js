@@ -73,12 +73,12 @@ function _Type(type) { // jshint ignore:line
   }
 
   if (type.constructor === Function) {
-    console.log('--- function');
+    //console.log('--- function');
     // factory functions
     return type();
   }
   if (type.constructor === Object) {
-    console.log('---- object');
+    //console.log('---- object');
     // sub-objects
     return _Object(type);
   }

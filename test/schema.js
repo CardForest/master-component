@@ -7,11 +7,11 @@ describe('master-component schema', function () {
 
   it('allows simple factory functions', function () {
     var n = MasterComponent.newInstance(Number);
-    assert.strictEqual(n, 0);
+    assert.equal(n, 0);
     var s = MasterComponent.newInstance(String);
-    assert.strictEqual(s, '');
+    assert.equal(s, '');
     var b = MasterComponent.newInstance(Boolean);
-    assert.strictEqual(b, false);
+    assert.equal(b, false);
   });
 
 
@@ -22,9 +22,9 @@ describe('master-component schema', function () {
       b: Boolean
     });
 
-    assert.strictEqual(o.n, 0);
-    assert.strictEqual(o.s, '');
-    assert.strictEqual(o.b, false);
+    assert.equal(o.n, 0);
+    assert.equal(o.s, '');
+    assert.equal(o.b, false);
   });
 
   it('allows props from sub-objects', function () {
@@ -36,47 +36,47 @@ describe('master-component schema', function () {
       }
     });
 
-    assert.strictEqual(o.inner.n, 0);
-    assert.strictEqual(o.inner.s, '');
-    assert.strictEqual(o.inner.b, false);
+    assert.equal(o.inner.n, 0);
+    assert.equal(o.inner.s, '');
+    assert.equal(o.inner.b, false);
   });
 
   it('allows props from $type config objects', function () {
     var o = MasterComponent.newInstance({
-      n: {$type: Number},
-      s: {$type: String},
-      b: {$type: Boolean},
+      n: {$type: Number, $value: 3},
+      s: {$type: String, $value: 'test'},
+      b: {$type: Boolean, $value: true},
       inner: {
         $type: {
           n: {$type: Number},
           s: {$type: String},
-          b: {$type: Boolean}
+          b: {$type: Boolean, $value: false}
         }
       }
     });
 
-    assert.strictEqual(o.n, 0);
-    assert.strictEqual(o.s, '');
-    assert.strictEqual(o.b, false);
+    assert.equal(o.n, 3);
+    assert.equal(o.s, 'test');
+    assert.equal(o.b, true);
 
-    assert.strictEqual(o.inner.n, 0);
-    assert.strictEqual(o.inner.s, '');
-    assert.strictEqual(o.inner.b, false);
+    assert.equal(o.inner.n, 0);
+    assert.equal(o.inner.s, '');
+    assert.equal(o.inner.b, false);
   });
 
 
   it('allows MasterComponent.FixedSizeArray as $type with factory function elemType', function () {
     var o = MasterComponent.newInstance({
       arr: {
-        size: 4,
         $type: MasterComponent.FixedSizeArray,
+        size: 4,
         elemType: Number
       }
     });
 
     assert.strictEqual(o.arr.length, 4);
-    assert.strictEqual(o.arr[0], 0);
-    assert.strictEqual(o.arr[3], 0);
+    assert.equal(o.arr[0], 0);
+    assert.equal(o.arr[3], 0);
   });
 
   it('allows MasterComponent.FixedSizeArray as $type with sub-objects elemType', function () {
@@ -93,8 +93,8 @@ describe('master-component schema', function () {
     });
 
     assert.strictEqual(o.arr.length, 4);
-    assert.strictEqual(o.arr[0].n, 0);
-    assert.strictEqual(o.arr[3].b, false);
+    assert.equal(o.arr[0].n, 0);
+    assert.equal(o.arr[3].b, false);
   });
 
   it('allows nested MasterComponent.FixedSizeArray', function () {
@@ -117,11 +117,11 @@ describe('master-component schema', function () {
       }
     });
 
-    assert.strictEqual(o.s, '');
-    assert.strictEqual(o.inner.s, '');
+    assert.equal(o.s, '');
+    assert.equal(o.inner.s, '');
     assert.strictEqual(o.inner.arr.length, 4);
-    assert.strictEqual(o.inner.arr[3].b, false);
+    assert.equal(o.inner.arr[3].b, false);
     assert.strictEqual(o.inner.arr[2].innerArr.length, 2);
-    assert.strictEqual(o.inner.arr[0].innerArr[1], 0);
+    assert.equal(o.inner.arr[0].innerArr[1], 0);
   });
 });
