@@ -6,17 +6,17 @@ var MasterComponent = require('../index2');
 describe('master-component schema', function () {
 
   it('allows simple factory functions', function () {
-    var n = MasterComponent(Number);
+    var n = MasterComponent.newInstance(Number);
     assert.strictEqual(n, 0);
-    var s = MasterComponent(String);
+    var s = MasterComponent.newInstance(String);
     assert.strictEqual(s, '');
-    var b = MasterComponent(Boolean);
+    var b = MasterComponent.newInstance(Boolean);
     assert.strictEqual(b, false);
   });
 
 
   it('allows props from factory functions', function () {
-    var o = MasterComponent({
+    var o = MasterComponent.newInstance({
       n: Number,
       s: String,
       b: Boolean
@@ -28,7 +28,7 @@ describe('master-component schema', function () {
   });
 
   it('allows props from sub-objects', function () {
-    var o = MasterComponent({
+    var o = MasterComponent.newInstance({
       inner: {
         n: Number,
         s: String,
@@ -42,7 +42,7 @@ describe('master-component schema', function () {
   });
 
   it('allows props from $type config objects', function () {
-    var o = MasterComponent({
+    var o = MasterComponent.newInstance({
       n: {$type: Number},
       s: {$type: String},
       b: {$type: Boolean},
@@ -66,7 +66,7 @@ describe('master-component schema', function () {
 
 
   it('allows MasterComponent.FixedSizeArray as $type with factory function elemType', function () {
-    var o = MasterComponent({
+    var o = MasterComponent.newInstance({
       arr: {
         size: 4,
         $type: MasterComponent.FixedSizeArray,
@@ -80,7 +80,7 @@ describe('master-component schema', function () {
   });
 
   it('allows MasterComponent.FixedSizeArray as $type with sub-objects elemType', function () {
-    var o = MasterComponent({
+    var o = MasterComponent.newInstance({
       arr: {
         $type: MasterComponent.FixedSizeArray,
         size: 4,
@@ -98,7 +98,7 @@ describe('master-component schema', function () {
   });
 
   it('allows nested MasterComponent.FixedSizeArray', function () {
-    var o = MasterComponent({
+    var o = MasterComponent.newInstance({
       s: String,
       inner: {
         s: String,
