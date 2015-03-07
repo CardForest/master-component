@@ -1,7 +1,7 @@
 'use strict';
 
 var assert = require('chai').assert;
-var MasterComponent = require('../index2');
+var MasterComponent = require('..');
 
 describe('master-component snapshot', function () {
   it('does nothing if not specified on factory functions', function () {

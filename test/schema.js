@@ -1,7 +1,7 @@
 'use strict';
 
 var assert = require('chai').assert;
-var MasterComponent = require('../index2');
+var MasterComponent = require('..');
 
 describe('master-component schema', function () {
 
