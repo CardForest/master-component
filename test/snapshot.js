@@ -129,4 +129,57 @@ describe('master-component snapshot', function () {
     assert.notProperty(oSnapshot, 'arr2');
   });
 
+  it('does accepts custom functions', function () {
+    var o = MasterComponent.newInstance({
+      n: {$type: Number, $snapshot: function() {return 4;}}
+    });
+    o.n = 3;
+
+    assert.equal(o.n, 3);
+    assert.equal(o.n.$snapshot(), 4);
+    assert.equal(o.$snapshot().n, 4);
+
+    assert.equal(o.n, 3);
+  });
+
+  it('does accepts custom functions with snapshot params', function () {
+    var o = MasterComponent.newInstance({
+      n: {
+        $type: Number, $snapshot: function (params) {
+          return params + 1;
+        }
+      },
+      removeMe: {
+        $type: Number,
+        $snapshot: function (params) {
+          if (params !== 4) {return this;}
+        }
+      },
+      arr: {
+        $type: MasterComponent.FixedSizeArray,
+        size: 4,
+        elemType: {
+          $type: Number,
+          $value: 5,
+          $snapshot: function (params) {
+            return this + params + 1;
+          }
+        }
+      },
+    });
+    o.n = 3;
+
+    var oSnapshot = o.$snapshot(4);
+
+    assert.equal(o.n, 3);
+    assert.notProperty(oSnapshot, 'removeMe');
+    assert.property(o.$snapshot(3), 'removeMe');
+    assert.equal(o.n.$snapshot(3), 4);
+    assert.equal(oSnapshot.n, 5);
+
+    assert.equal(oSnapshot.arr[0], 10);
+
+    assert.equal(o.n, 3);
+  });
+
 });
