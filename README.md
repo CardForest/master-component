@@ -1,6 +1,6 @@
 #  [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url]
 
-> JavaScript Objects with strict structure, typing, partial views, and changelog.
+> JavaScript objects with strict structure, typing, partial views, and changelog.
 
 ** this is a work in progress **
 
