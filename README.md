@@ -42,11 +42,11 @@ $ npm run browser
 ### v0.2.0
 
 ##### partial views 
-- [ ] allow specifying hidden paths for partial views
+- [x] allow specifying hidden paths for partial views
 - [ ] allow to 'unhide' paths when creating partial views
 
 ##### Changelog
-- [ ] record primitive value set in changelog
+- [x] record primitive value set in changelog
 - [ ] allow a partial view of the changelog
 - [ ] allow to 'unhide' paths when creating a changelog partial views
 

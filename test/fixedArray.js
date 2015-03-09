@@ -12,8 +12,8 @@ describe('FixedArray', function () {
     });
 
     assert.strictEqual(arr.length, 4);
-    assert.equal(arr[0], 0);
-    assert.equal(arr[3], 0);
+    assert.strictEqual(arr[0], 0);
+    assert.strictEqual(arr[3], 0);
   });
 
   it('allows object elements', function () {
@@ -28,8 +28,8 @@ describe('FixedArray', function () {
     });
 
     assert.strictEqual(arr.length, 4);
-    assert.equal(arr[0].n, 0);
-    assert.equal(arr[3].b, false);
+    assert.strictEqual(arr[0].n, 0);
+    assert.strictEqual(arr[3].b, false);
   });
 
   it('allows nested FixedArray', function () {
@@ -45,7 +45,7 @@ describe('FixedArray', function () {
 
     assert.strictEqual(arr.length, 4);
     assert.strictEqual(arr[2].length, 2);
-    assert.equal(arr[0][1], 0);
+    assert.strictEqual(arr[0][1], 0);
   });
 });
 
@@ -57,8 +57,8 @@ describe('FixedArray - syntactic sugar', function () {
     }]);
 
     assert.strictEqual(arr.length, 4);
-    assert.equal(arr[0], 0);
-    assert.equal(arr[3], 0);
+    assert.strictEqual(arr[0], 0);
+    assert.strictEqual(arr[3], 0);
   });
 
   it('allows object elements', function () {
@@ -72,8 +72,8 @@ describe('FixedArray - syntactic sugar', function () {
     }]);
 
     assert.strictEqual(arr.length, 4);
-    assert.equal(arr[0].n, 0);
-    assert.equal(arr[3].b, false);
+    assert.strictEqual(arr[0].n, 0);
+    assert.strictEqual(arr[3].b, false);
   });
 
   it('allows nested FixedArray', function () {
@@ -87,7 +87,7 @@ describe('FixedArray - syntactic sugar', function () {
 
     assert.strictEqual(arr.length, 4);
     assert.strictEqual(arr[2].length, 2);
-    assert.equal(arr[0][1], 0);
+    assert.strictEqual(arr[0][1], 0);
   });
 });
 
