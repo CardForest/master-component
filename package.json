@@ -1,7 +1,7 @@
 {
   "name": "master-component",
   "version": "0.0.3",
-  "description": "JavaScript Objects with strict structure, typing, access control, and change control.",
+  "description": "JavaScript Objects with strict structure, typing, partial views, and changelog.",
   "homepage": "https://github.com/CardForest/master-component",
   "author": {
     "name": "Amit Portnoy",
