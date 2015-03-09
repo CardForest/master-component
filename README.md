@@ -1,10 +1,10 @@
 #  [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url]
 
-> JavaScript Objects with strict structure, typing, access control, and change control.
+> JavaScript Objects with strict structure, typing, partial views, and changelog.
 
 ** this is a work in progress **
 
-For now the [tests](https://github.com/CardForest/master-component/blob/master/test/test.js) are the only documentation.
+For now the [tests](https://github.com/CardForest/master-component/tree/master/test) are the only documentation.
 
 
 ## Install
@@ -16,7 +16,7 @@ $ npm install --save master-component
 ## Usage
 
 ```js
-var MasterComponent = require('master-component');
+var Master = require('master-component');
 
 ```
 
@@ -29,31 +29,33 @@ $ npm run browser
 
 ### v0.1.0
 
-##### Structure 
+##### schema 
 - [x] primitive values
-- [x] nested js object
-- [x] fixed array type
-- [ ] prevent setting of non primitive values
+- [x] nested js objects
+- [x] array type
+- [x] nested array
 
-##### Typing
-- [ ] guard types of primitive values
-
-##### Access 
-- [x] readAccess modifiers in primitive values
-- [x] readAccess modifiers in objects
-- [ ] readAccess modifiers in fixed arrays
-
-##### Change
-- [ ] record primitive value set in changeset
+##### strictness
+- [x] guard types of primitive values
+- [x] prevent setting of non primitive values
 
 ### v0.2.0
 
+##### partial views 
+- [ ] allow specifying hidden paths for partial views
+- [ ] allow to 'unhide' paths when creating partial views
+
+##### Changelog
+- [ ] record primitive value set in changelog
+- [ ] allow a partial view of the changelog
+- [ ] allow to 'unhide' paths when creating a changelog partial views
+
+### v0.3.0
+
 ##### Custom Components
-- [ ] structure
-- [ ] access
-- [ ] change
-
-
+- [ ] custom schema
+- [ ] custom partial views
+- [ ] custom changelog events
 
 ## License
 

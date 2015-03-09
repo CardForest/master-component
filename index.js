@@ -1,8 +1,12 @@
-'use strict';
+"use strict";
 
-var MasterComponent = require('./lib/masterComponent');
-MasterComponent.FixedSizeArray = require('./lib/fixedSizeArray');
-MasterComponent.Object = require('./lib/object');
-MasterComponent.FactoryFunction = require('./lib/factoryFunction');
+var Changelog = require('./lib/changelog');
+var u = require('./lib/util');
 
-module.exports = MasterComponent;
+module.exports = {
+  newInstance: function(config) {
+    return u.instantiate(u.normalize(config), [],  new Changelog());
+  },
+  FixedArray: require('./lib/fixedArray'),
+  FixedObject: require('./lib/fixedObject')
+};
