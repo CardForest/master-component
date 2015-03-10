@@ -17,17 +17,11 @@ describe('Changelog', function () {
 
     assert.strictEqual(o.$changelog.length, 3);
 
-    assert.strictEqual(o.$changelog[0].name, 'setPrimitiveValue');
-    assert.strictEqual(o.$changelog[0].args[0][0], 'n');
-    assert.strictEqual(o.$changelog[0].args[1], 2);
-
-    assert.strictEqual(o.$changelog[1].name, 'setPrimitiveValue');
-    assert.strictEqual(o.$changelog[1].args[0][0], 's');
-    assert.strictEqual(o.$changelog[1].args[1], 'some value');
-
-    assert.strictEqual(o.$changelog[2].name, 'setPrimitiveValue');
-    assert.strictEqual(o.$changelog[2].args[0][0], 'b');
-    assert.strictEqual(o.$changelog[2].args[1], true);
+    assert.deepEqual(o.$changelog.slice(0), [
+      {name: 'setPrimitiveValue', args: [['n'], 2]},
+      {name: 'setPrimitiveValue', args: [['s'], 'some value']},
+      {name: 'setPrimitiveValue', args: [['b'], true]}
+    ]);
   });
 
   it('record \'setPrimitiveValue\' on nested properties', function () {
@@ -45,16 +39,10 @@ describe('Changelog', function () {
 
     assert.strictEqual(o.$changelog.length, 3);
 
-    assert.strictEqual(o.$changelog[0].name, 'setPrimitiveValue');
-    assert.deepEqual(o.$changelog[0].args[0], ['o', 'n']);
-    assert.strictEqual(o.$changelog[0].args[1], 2);
-
-    assert.strictEqual(o.$changelog[1].name, 'setPrimitiveValue');
-    assert.deepEqual(o.$changelog[1].args[0], ['o', 's']);
-    assert.strictEqual(o.$changelog[1].args[1], 'some value');
-
-    assert.strictEqual(o.$changelog[2].name, 'setPrimitiveValue');
-    assert.deepEqual(o.$changelog[2].args[0], ['o', 'b']);
-    assert.strictEqual(o.$changelog[2].args[1], true);
+    assert.deepEqual(o.$changelog.slice(0), [
+      {name: 'setPrimitiveValue', args: [['o', 'n'], 2]},
+      {name: 'setPrimitiveValue', args: [['o', 's'], 'some value']},
+      {name: 'setPrimitiveValue', args: [['o', 'b'], true]}
+    ]);
   });
 });
