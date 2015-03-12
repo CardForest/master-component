@@ -82,4 +82,24 @@ describe('reveal paths', function () {
     assert.notProperty(v.o, 'hidden');
     assert.property(v.o, 'hiddenThenRevealed');
   });
+
+  it('should reveal hidden \'setPrimitiveValue\'', function () {
+    var o = Master.newInstance({
+      n: Number,
+      s: {$type: String, $hidden: true},
+      b: Boolean
+    });
+
+    o.n = 2;
+    o.s = 'some value';
+    o.b = true;
+
+    var cv = o.$changelog.view('s');
+
+    assert.deepEqual(cv, [
+      {type: 'setPrimitiveValue', payload: [['n'], 2]},
+      {type: 'setPrimitiveValue', hidden: true, payload: [['s'], 'some value']},
+      {type: 'setPrimitiveValue', payload: [['b'], true]}
+    ]);
+  });
 });

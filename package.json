@@ -12,7 +12,7 @@
     "type": "git",
     "url": "https://github.com/CardForest/master-component.git"
   },
-  "license": "BSD",
+  "license": "LGPL",
   "files": [
     "index.js"
   ],

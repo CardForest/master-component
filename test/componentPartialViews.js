@@ -3,7 +3,7 @@
 var assert = require('chai').assert;
 var Master = require('..');
 
-describe('partial views', function () {
+describe('component partial views', function () {
   it('normally returns the same values', function () {
     var v = Master.newInstance({
       n: {$type: Number, $initialValue: 3},

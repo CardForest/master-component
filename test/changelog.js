@@ -18,9 +18,9 @@ describe('Changelog', function () {
     assert.strictEqual(o.$changelog.length, 3);
 
     assert.deepEqual(o.$changelog.slice(0), [
-      {name: 'setPrimitiveValue', args: [['n'], 2]},
-      {name: 'setPrimitiveValue', args: [['s'], 'some value']},
-      {name: 'setPrimitiveValue', args: [['b'], true]}
+      {type: 'setPrimitiveValue', payload: [['n'], 2]},
+      {type: 'setPrimitiveValue', payload: [['s'], 'some value']},
+      {type: 'setPrimitiveValue', payload: [['b'], true]}
     ]);
   });
 
@@ -40,9 +40,42 @@ describe('Changelog', function () {
     assert.strictEqual(o.$changelog.length, 3);
 
     assert.deepEqual(o.$changelog.slice(0), [
-      {name: 'setPrimitiveValue', args: [['o', 'n'], 2]},
-      {name: 'setPrimitiveValue', args: [['o', 's'], 'some value']},
-      {name: 'setPrimitiveValue', args: [['o', 'b'], true]}
+      {type: 'setPrimitiveValue', payload: [['o', 'n'], 2]},
+      {type: 'setPrimitiveValue', payload: [['o', 's'], 'some value']},
+      {type: 'setPrimitiveValue', payload: [['o', 'b'], true]}
+    ]);
+  });
+
+  it('record \'setPrimitiveValue\' on array elements', function () {
+    var arr = Master.newInstance([{
+      $type: Number,
+      $length: 3
+    }]);
+
+    arr[0] = 2;
+
+    assert.strictEqual(arr.$changelog.length, 1);
+
+    assert.deepEqual(arr.$changelog.slice(0), [
+      {type: 'setPrimitiveValue', payload: [[0], 2]}
+    ]);
+  });
+
+  it('record \'setPrimitiveValue\' on inner array elements', function () {
+    var arr = Master.newInstance([{
+      $type: [{
+        $type: Number,
+        $length: 3
+      }],
+      $length: 3
+    }]);
+
+    arr[0][1] = 2;
+
+    assert.strictEqual(arr.$changelog.length, 1);
+
+    assert.deepEqual(arr.$changelog.slice(0), [
+      {type: 'setPrimitiveValue', payload: [[0, 1], 2]}
     ]);
   });
 });
