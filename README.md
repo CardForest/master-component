@@ -57,7 +57,9 @@ $ npm run browser
 - [ ] custom partial views
 - [ ] custom changelog events
 
-> Copyright © 2015 [Amit Portnoy](https://github.com/amitport).
+<br>
+---
+###### Copyright © 2015 [Amit Portnoy](https://github.com/amitport).
 
 [npm-image]: https://img.shields.io/npm/v/master-component.svg?style=flat
 [npm-url]: https://npmjs.org/package/master-component
