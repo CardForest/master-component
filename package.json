@@ -14,7 +14,8 @@
   },
   "license": "LGPL",
   "files": [
-    "index.js"
+    "index.js",
+    "lib"
   ],
   "keywords": [
     "master-component",
