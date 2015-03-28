@@ -55,5 +55,17 @@ describe('custom components', function () {
     assert(spy.$setter.calledWith(2));
     assert.strictEqual(o.s.innerVal, 5);
   });
+
+  it('should should throw is setting without $setter', function () {
+    var spy = sinon.spy(CustomComponent);
+
+    var o = Master.newInstance({
+      s: {$type: spy, param: 3}
+    });
+
+    assert.throw(function () {
+      o.s = 2;
+    });
+  });
 });
 
