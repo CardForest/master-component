@@ -6,9 +6,11 @@ var Master = require('..');
 
 
 function CustomComponent(config, keyPath, changeManager) {
-  this.config = config;
-  this.keyPath = keyPath;
-  this.changeManager = changeManager;
+  Object.defineProperty(this, '$config', {value: config});
+  Object.defineProperty(this, '$keyPath', {value: keyPath});
+  Object.defineProperty(this, '$changeManager', {value: changeManager});
+
+  this.innerVal = config.param;
 }
 CustomComponent.prototype = Object.create(Master.Component.prototype);
 
@@ -17,15 +19,41 @@ describe('custom components', function () {
     var spy = sinon.spy(CustomComponent);
 
     Master.newInstance({
-      n: spy,
-      s: String,
-      b: Boolean
+      s: spy
     });
 
     assert(spy.calledWithNew());
     assert(spy.calledOnce);
-    assert(spy.calledWith({$type: spy}, ['n']));
+    assert(spy.calledWith({$type: spy}, ['s']));
     assert.strictEqual(spy.args[0][2].constructor.name, 'Changelog');
+  });
+
+  it('should pass parameter to custom components on initialization', function () {
+    var spy = sinon.spy(CustomComponent);
+
+    var o = Master.newInstance({
+      s: {$type: spy, param: 'paramValue'}
+    });
+
+    assert(spy.calledWith({$type: spy, param: 'paramValue'}));
+    assert.strictEqual(o.s.innerVal, 'paramValue');
+  });
+
+  it('should delegate to $setter if available', function () {
+    var spy = sinon.spy(CustomComponent);
+    spy.$setter = sinon.spy(function (newVal) {
+      this.innerVal = this.innerVal + newVal;
+    });
+
+    var o = Master.newInstance({
+      s: {$type: spy, param: 3}
+    });
+
+    o.s = 2;
+
+    assert(spy.$setter.calledOnce);
+    assert(spy.$setter.calledWith(2));
+    assert.strictEqual(o.s.innerVal, 5);
   });
 });
 
