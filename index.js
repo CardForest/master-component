@@ -8,5 +8,6 @@ module.exports = {
     return u.instantiate(u.normalize(config), [],  new Changelog());
   },
   FixedArray: require('./lib/fixedArray'),
-  FixedObject: require('./lib/fixedObject')
+  FixedObject: require('./lib/fixedObject'),
+  Component: require('./lib/component')
 };
