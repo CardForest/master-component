@@ -5,10 +5,8 @@ var sinon = require('sinon');
 var Master = require('..');
 
 
-function CustomComponent(config, keyPath, changeManager) {
-  Object.defineProperty(this, '$config', {value: config});
-  Object.defineProperty(this, '$keyPath', {value: keyPath});
-  Object.defineProperty(this, '$changeManager', {value: changeManager});
+function CustomComponent(config, keyPath, changelog) {
+  Master.Component.call(this, config, keyPath, changelog);
 
   this.innerVal = config.param;
 }
