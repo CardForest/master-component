@@ -3,8 +3,8 @@
 var assert = require('chai').assert;
 var Master = require('..');
 
-describe('serialization', function () {
-  it('can serialize object with primitive properties', function () {
+describe('snapshots', function () {
+  it('can make snapshots of object with primitive properties', function () {
     var o = Master.newInstance({
       n: Number,
       s: String,
@@ -18,7 +18,7 @@ describe('serialization', function () {
     assert.deepEqual(o.$snapshot(), {n: 3, s: 'test', b: true});
   });
 
-  it('can serialize nested objects', function () {
+  it('can make snapshots of nested objects', function () {
     var o = Master.newInstance({
       inner: {
         n: Number,
@@ -35,7 +35,7 @@ describe('serialization', function () {
   });
 
 
-  it('can serialize arrays', function () {
+  it('can make snapshots of arrays', function () {
     var arr = Master.newInstance([{
       $type: Number,
       $length: 2
@@ -48,7 +48,7 @@ describe('serialization', function () {
     assert.deepEqual(arr.$snapshot(), [5, 6]);
   });
 
-  it('can serialize arrays within objects', function () {
+  it('can make snapshots of arrays within objects', function () {
     var o = Master.newInstance({arr: [{
       $type: Number,
       $length: 2
@@ -60,7 +60,7 @@ describe('serialization', function () {
     assert.deepEqual(o.$snapshot(), {arr: [5, 6]});
   });
 
-  it('can create master components from snapshots', function () {
+  it('can restore master components from snapshots', function () {
     var o = Master.restore({
       n: Number,
       s: String,
@@ -81,7 +81,7 @@ describe('serialization', function () {
     assert.strictEqual(o.inner.b, false);
   });
 
-  it('can create master components from snapshots with nested objects', function () {
+  it('can restore master components from snapshots with nested objects', function () {
     var o = Master.restore({
       inner: {
         n: Number,
@@ -95,7 +95,7 @@ describe('serialization', function () {
     assert.strictEqual(o.inner.b, false);
   });
 
-  it('can create master components from snapshots with arrays', function () {
+  it('can restore master components from snapshots with arrays', function () {
     var o = Master.restore({
       arr: [{
         $type: {
@@ -114,5 +114,27 @@ describe('serialization', function () {
     assert.strictEqual(o.arr[1].n, 5);
     assert.strictEqual(o.arr[1].s, 'test2');
     assert.strictEqual(o.arr[1].b, false);
+  });
+
+
+  it('does a round-trip', function () {
+    var config = {
+      n: Number,
+      s: String,
+      b: Boolean,
+      inner: {
+        arr: [{
+          $type: Number,
+          $length: 2
+        }]
+      }
+    };
+    var o = Master.newInstance(config);
+
+    o.n = 3; o.s = 'test'; o.b = true; o.inner.arr[0] = 2; o.inner.arr[1] = 16;
+
+    var o2 = Master.restore(config, o.$snapshot());
+
+    assert.deepEqual(o, o2);
   });
 });
