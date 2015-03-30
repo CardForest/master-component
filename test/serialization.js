@@ -15,7 +15,7 @@ describe('serialization', function () {
     o.s = 'test';
     o.b = true;
 
-    assert.deepEqual(o.$serialize(), {n: 3, s: 'test', b: true});
+    assert.deepEqual(o.$snapshot(), {n: 3, s: 'test', b: true});
   });
 
   it('can serialize nested objects', function () {
@@ -31,7 +31,7 @@ describe('serialization', function () {
     o.inner.s = 'test';
     o.inner.b = true;
 
-    assert.deepEqual(o.$serialize(), {inner: {n: 3, s: 'test', b: true}});
+    assert.deepEqual(o.$snapshot(), {inner: {n: 3, s: 'test', b: true}});
   });
 
 
@@ -45,7 +45,7 @@ describe('serialization', function () {
     arr[0] = 5;
     arr[1] = 6;
 
-    assert.deepEqual(arr.$serialize(), [5, 6]);
+    assert.deepEqual(arr.$snapshot(), [5, 6]);
   });
 
   it('can serialize arrays within objects', function () {
@@ -57,7 +57,7 @@ describe('serialization', function () {
     o.arr[0] = 5;
     o.arr[1] = 6;
 
-    assert.deepEqual(o.$serialize(), {arr: [5, 6]});
+    assert.deepEqual(o.$snapshot(), {arr: [5, 6]});
   });
 
   it('can create master components from snapshots', function () {
