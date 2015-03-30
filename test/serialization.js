@@ -41,6 +41,7 @@ describe('serialization', function () {
       $length: 2
     }]);
 
+
     arr[0] = 5;
     arr[1] = 6;
 
@@ -57,5 +58,61 @@ describe('serialization', function () {
     o.arr[1] = 6;
 
     assert.deepEqual(o.$serialize(), {arr: [5, 6]});
+  });
+
+  it('can create master components from snapshots', function () {
+    var o = Master.restore({
+      n: Number,
+      s: String,
+      b: Boolean,
+      inner: {
+        n: Number,
+        s: String,
+        b: Boolean
+      }
+    }, {n :3, s: 'test', b: true, inner: {n :4, s: 'test2', b: false}});
+
+    assert.strictEqual(o.n, 3);
+    assert.strictEqual(o.s, 'test');
+    assert.strictEqual(o.b, true);
+
+    assert.strictEqual(o.inner.n, 4);
+    assert.strictEqual(o.inner.s, 'test2');
+    assert.strictEqual(o.inner.b, false);
+  });
+
+  it('can create master components from snapshots with nested objects', function () {
+    var o = Master.restore({
+      inner: {
+        n: Number,
+        s: String,
+        b: Boolean
+      }
+    }, {inner: {n :4, s: 'test', b: false}});
+
+    assert.strictEqual(o.inner.n, 4);
+    assert.strictEqual(o.inner.s, 'test');
+    assert.strictEqual(o.inner.b, false);
+  });
+
+  it('can create master components from snapshots with arrays', function () {
+    var o = Master.restore({
+      arr: [{
+        $type: {
+          n: Number,
+          s: String,
+          b: Boolean
+        },
+        $length: 2
+      }]
+    }, {arr: [{n : 4, s: 'test', b: true}, {n : 5, s: 'test2', b: false}]});
+
+    assert.strictEqual(o.arr[0].n, 4);
+    assert.strictEqual(o.arr[0].s, 'test');
+    assert.strictEqual(o.arr[0].b, true);
+
+    assert.strictEqual(o.arr[1].n, 5);
+    assert.strictEqual(o.arr[1].s, 'test2');
+    assert.strictEqual(o.arr[1].b, false);
   });
 });
