@@ -1,6 +1,6 @@
 {
   "name": "master-component",
-  "version": "0.1.4",
+  "version": "0.2.0",
   "description": "JavaScript objects with strict structure, typing, partial views, and changelog.",
   "homepage": "https://github.com/CardForest/master-component",
   "author": {
