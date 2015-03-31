@@ -61,7 +61,7 @@ describe('snapshots', function () {
   });
 
   it('can restore master components from snapshots', function () {
-    var o = Master.restore({
+    var o = Master.newInstance({
       n: Number,
       s: String,
       b: Boolean,
@@ -82,7 +82,7 @@ describe('snapshots', function () {
   });
 
   it('can restore master components from snapshots with nested objects', function () {
-    var o = Master.restore({
+    var o = Master.newInstance({
       inner: {
         n: Number,
         s: String,
@@ -96,7 +96,7 @@ describe('snapshots', function () {
   });
 
   it('can restore master components from snapshots with arrays', function () {
-    var o = Master.restore({
+    var o = Master.newInstance({
       arr: [{
         $type: {
           n: Number,
@@ -133,7 +133,7 @@ describe('snapshots', function () {
 
     o.n = 3; o.s = 'test'; o.b = true; o.inner.arr[0] = 2; o.inner.arr[1] = 16;
 
-    var o2 = Master.restore(config, o.$snapshot());
+    var o2 = Master.newInstance(config, o.$snapshot());
 
     assert.deepEqual(o, o2);
   });
