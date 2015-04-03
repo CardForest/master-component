@@ -60,11 +60,22 @@ describe('snapshots', function () {
     assert.deepEqual(o.$snapshot(), {arr: [5, 6]});
   });
 
+  it('does not record getter or mutators', function () {
+    var o = Master.newInstance({
+      g: function () {return 3;},
+      m: function $() {},
+    });
+
+    assert.deepEqual(o.$snapshot(), {});
+  });
+
   it('can restore master components from snapshots', function () {
     var o = Master.newInstance({
       n: Number,
       s: String,
       b: Boolean,
+      g: function () {return this.n;},
+      m: function $() {return this.n = 5;},
       inner: {
         n: Number,
         s: String,
@@ -72,7 +83,11 @@ describe('snapshots', function () {
       }
     }, {n :3, s: 'test', b: true, inner: {n :4, s: 'test2', b: false}});
 
+    assert.property(o, 'g');
+    assert.property(o, 'm');
     assert.strictEqual(o.n, 3);
+    o.m();
+    assert.strictEqual(o.g, 5);
     assert.strictEqual(o.s, 'test');
     assert.strictEqual(o.b, true);
 
