@@ -49,9 +49,10 @@ describe('scopes', function () {
 
     assert.deepEqual(s, {
       n: 0,
+      s: {$ref: 'HIDDEN'},
       b: false,
-      o: {},
-      a: [{}, {}, {}]
+      o: {n: {$ref: 'HIDDEN'}},
+      a: [{n: {$ref: 'HIDDEN'}}, {n: {$ref: 'HIDDEN'}}, {n: {$ref: 'HIDDEN'}}]
     });
   });
 
@@ -62,18 +63,36 @@ describe('scopes', function () {
 
     var s = Master.newInstance({
       n: {$type: Number, $scope: Scope.PUBLIC},
-      s: {$type: String, $scope: 'customScope'},
+      s: {$type: String, $initialValue: 'test', $scope: 'customScope'},
       b: {$type: Boolean},
       o: {$type: {n: {$type: Number, $scope: Scope.MASTER}}},
       a: {$type: Master.FixedArray, $elem: {n: {$type: Number, $scope: Scope.MASTER}}, $length: 3}
     }).$snapshot({includes: spy});
 
     assert.strictEqual(spy.callCount, 5); // (it doesn't enter the array and object sub elements)
-    assert(spy.calledWith(['s'], {$getter: false, $primitive: true, $scope: 'customScope', $type: String}));
+    //assert(spy.calledWith(['s'], {$getter: false, $primitive: true, $scope: 'customScope', $type: String}));
 
     assert.deepEqual(s, {
-      s: '',
+      n: {$ref: 'HIDDEN'},
+      s: 'test',
+      b: {$ref: 'HIDDEN'},
+      o: {$ref: 'HIDDEN'},
+      a: {$ref: 'HIDDEN'}
     });
+  });
+
+  it('can restore master components from snapshots with hidden scopes', function () {
+    var config = {
+      n: {$type: Number, $scope: Scope.PUBLIC},
+      s: {$type: String, $scope: 'customScope'},
+      b: {$type: Boolean},
+      o: {$type: {n: {$type: Number, $scope: Scope.MASTER}}},
+      a: {$type: Master.FixedArray, $elem: {n: {$type: Number, $scope: Scope.MASTER}}, $length: 3}
+    };
+    var original = Master.newInstance(config).$snapshot(Scope.PUBLIC);
+    var restored = Master.newInstance(config, original).$snapshot();
+
+    assert.deepEqual(restored, original);
   });
 
   // TODO move this a new npm module
@@ -124,11 +143,11 @@ describe('scopes', function () {
     assert.deepEqual(s, {
       n: 0,
       b: false,
-      o: {},
+      o: {n: {$ref: 'HIDDEN'}},
       players: [
-        {playerPub: 0},
+        {playerPub: 0, playerSecret: {$ref: 'HIDDEN'}},
         {playerPub: 0, playerSecret: 42},
-        {playerPub: 0}
+        {playerPub: 0, playerSecret: {$ref: 'HIDDEN'}}
       ]
     });
   });
