@@ -57,7 +57,7 @@ describe('scopes', function () {
 
   it('snapshot with custom scope can control what they return', function () {
     var spy = sinon.spy(function(_, config) {
-      return config.hasOwnProperty('$scope') && config.$scope === 'customScope'
+      return config.hasOwnProperty('$scope') && config.$scope === 'customScope';
     });
 
     var s = Master.newInstance({
