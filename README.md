@@ -2,7 +2,11 @@
 
 > JavaScript objects with strict structure, typing, partial views, and changelog.
 
-** this is a work in progress **
+---
+
+_This module is **deprecated**, see [master-class](https://github.com/CardForest/master-class) instead_.
+
+---
 
 For now the [tests](https://github.com/CardForest/master-component/tree/master/test) are the only documentation.
 
